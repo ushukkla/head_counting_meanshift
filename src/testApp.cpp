@@ -1,20 +1,16 @@
-#include "testApp.h"
+#include<testApp.h>
 
-#include "libfreenect.h" 
+#include<libfreenect.h>
 using namespace ofxCv;
 using namespace cv;
- 
 
-//--------------------------------------------------------------
 void testApp::setup(){
     
-    //Setup contour finder
+
     contourFinder.setMinAreaRadius(30);
 	contourFinder.setMaxAreaRadius(300);
 	contourFinder.setThreshold(15);
-	// wait for half a frame before forgetting something
 	contourFinder.getTracker().setPersistence(1000000);
-	// an object can move up to 32 pixels per frame
 	contourFinder.getTracker().setMaximumDistance(320);
     
     headFinder.setMinAreaRadius(50);
