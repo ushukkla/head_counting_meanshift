@@ -75,7 +75,12 @@ public:
         cv::calcHist(&image,
                      1,              // histogram of 1 image only
                      channels,       // the channel used
-                     cv::Mat(),      // no mask is used
+                     
+cv::Mat::Mat	(	Size  4,
+int  CV_64FC4,
+void * 	data,
+size_t 	step = AUTO_STEP 
+)	,      // masking is used
                      hist,           // the resulting histogram
                      1,              // it is a 1D histogram
                      histSize,       // number of bins
@@ -86,7 +91,7 @@ public:
     }
     
     // Computes the 1D histogram and returns an image of it.
-    cv::Mat getHistogramImage(const cv::Mat &image){
+    cv::Mat::Mat getHistogramImage(const cv::Mat &image){
         
         // Compute histogram first
         cv::MatND hist= getHistogram(image);
@@ -97,10 +102,10 @@ public:
         cv::minMaxLoc(hist, &minVal, &maxVal, 0, 0);
         
         // Image on which to display histogram
-        cv::Mat histImg(histSize[0], histSize[0], CV_8U,cv::Scalar(255));
+        cv::Mat::Mat histImg(histSize[0], histSize[0], CV_8U,cv::Scalar(255));
         
-        // set highest point at 90% of nbins
-        int hpt = static_cast<int>(0.9*histSize[0]);
+        // nbins we are taking is of 85%
+        int hpt = static_cast<int>(0.85*histSize[0]);
         
         // Draw vertical line for each bin
         for( int h = 0; h < histSize[0]; h++ ) {
@@ -114,16 +119,16 @@ public:
     }
     
     // Equalizes the source image.
-    cv::Mat equalize(const cv::Mat &image) {
+    cv::Mat::Mat equalize(const cv::Mat &image) {
         
-        cv::Mat result;
+        cv::Mat::Mat result;
         cv::equalizeHist(image,result);
         
         return result;
     }
     
     // Stretches the source image.
-    cv::Mat stretch(const cv::Mat &image, int minValue=0) {
+    cv::Mat::Mat stretch(const cv::Mat &image, int minValue=0) {
         
         // Compute histogram first
         cv::MatND hist= getHistogram(image);
@@ -156,17 +161,17 @@ public:
         }
         
         // Apply lookup table
-        cv::Mat result;
+       cv::Mat::Mat result;
         result= applyLookUp(image,lookup);
         
         return result;
     }
     
     // Applies a lookup table transforming an input image into a 1-channel image
-    cv::Mat applyLookUp(const cv::Mat& image, const cv::MatND& lookup) {
+    cv::Mat::Mat applyLookUp(const cv::Mat& image, const cv::MatND& lookup) {
         
         // Set output image (always 1-channel)
-        cv::Mat result(image.rows,image.cols,CV_8U);
+        cv::Mat::Mat result(image.rows,image.cols,CV_8U);
         cv::Mat_<uchar>::iterator itr= result.begin<uchar>();
         
         // Iterates over the input image
