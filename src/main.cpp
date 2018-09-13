@@ -2,11 +2,10 @@
 #include "ofxCv.h"
 #include "testApp.h"
 
-//========================================================================
-int main( ){
-	ofSetupOpenGL(1204,768,OF_WINDOW);			// <-------- setup the GL context
 
-	
-	ofRunApp(new testApp());
+int main( ){
+	ofAppNoWindow window;
+    ofSetupOpenGL(&window, 1204, 768, OF_WINDOW);
+    ofRunApp(new ofApp());
 
 }
